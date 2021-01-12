@@ -10,3 +10,5 @@
 		$rest = new Rest($_REQUEST); //Criando um objeto e enviando como parâmetro a requisição para o método construtor
 		echo $rest->run(); //Executando o método
 	}
+
+	

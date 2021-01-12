@@ -1,4 +1,86 @@
 <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Págia do Cliente</title>
+</head>
+<body>
+
+    
+    <script src="jquery-3.5.1.min.js"></script> <!-- Importando Biblioteca Jquery -->
+
+    <script>
+        let user_email = 'teste@gmail.com'; //Criando a variável que vai receber o email para ser validado pela classe AuthController
+        let user_password = '123';  //Criando a variável que vai receber a senha para ser validado pela classe AuthController
+
+        function loginApi(){ //Função para fazer login na Api
+            $.ajax({ //Função ajax
+                url: "http://localhost/jwt_auth_api_rest_php-master/JWT_APIRest/api/auth/login", //Link para onde irão os parâmetros que no caso é AuthController
+                method: 'POST', //Método a ser usado para envio dos dados para o AuthController
+                data: {'email' : user_email, 'password': user_password} //Dados que serão enviados
+            })
+            .done(function( data ) { //Quando o retorno dos dados estiverem prontos
+                console.log(data);
+            });
+        }
+
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -38,3 +120,5 @@
     </script>
 </body>
 </html>
+
+-->

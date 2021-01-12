@@ -1,5 +1,47 @@
 <?php
+    namespace Rafa\Http\Controllers;
 
+    class AuthController{
+        public static function login(){
+
+            if ($_POST['email'] == 'teste@gmail.com' && $_POST['123']) {
+                //Application Key
+                $key = '123456'; //É a senha do token
+
+                //Header Token
+                $header = [
+                    'typ' => 'JWT', //Tipo de criptografia
+                    'alg' => 'HS256' //Algoritmo usado
+                ];
+
+                //Payload - Content
+                $payload = [ //Campos que devem ser autenticados
+                    'name' => 'Nome do usuario', 
+                    'email' => 'email@email.com',
+                ];
+
+                //JSON
+                $header = json_encode($header); //Transforma o $header em JSON
+                $payload = json_encode($payload); //Transforma o $payload em JSON
+
+                //Base 64
+                $header = base64_encode($header); //Criptografar os dados
+                $payload = base64_encode($payload); //Criptografar os dados
+
+                //Sign
+                $sign = hash_hmac('sha256', $header . "." . $payload, $key, true); //Crinado uma assinatura no qual o 'sha256' é o tipo de criptografia, o $header e o $payload são concatenados, depois vem a chave de criptografia e em seguia a poarametro true
+                $sign = base64_encode($sign); //Criptografar a assinatura
+
+                //Token
+                $token = $header . '.' . $payload . '.' . $sign; //Criando Token
+
+                return $token; //Retornando o token
+            }
+
+            throw new \Exception('Não Autenticado'); //Caso der error exibe essa mensagem
+            
+        }
+    }
 
 
 
