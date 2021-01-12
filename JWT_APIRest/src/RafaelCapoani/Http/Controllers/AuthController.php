@@ -1,4 +1,64 @@
 <?php
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
     namespace Rafa\Http\Controllers;
     
     class AuthController {
@@ -67,8 +127,10 @@
 
             return false;
         }
-        
+        /*
         /*Criei os dois métodos abaixo, pois o jwt.io agora recomenda o uso do 'base64url_encode' no lugar do 'base64_encode'*/
+
+        /*
         private function base64urlEncode($data)
         {
             // First of all you should encode $data to Base64 string
@@ -95,4 +157,5 @@
             // Decode Base64 string and return the original data
             return base64_decode($b64, $strict);
         }*/
-    }
+    //}
+

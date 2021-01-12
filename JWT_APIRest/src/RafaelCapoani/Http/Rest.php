@@ -16,39 +16,39 @@
 
 		public function load()//Criando método
 		{
-			$newUrl = explode('/', $this->request['url']); //Quebrando a requisiçaõ passada na URL para se transformar em um array e colocá-la em outra variável
+			$newUrl = explode('/', $this->request['url']); //Quebrando a requisiçaõ passada na URL para se transformar em um array e colocá-la em um novo array
 			array_shift($newUrl); //Tirando os dados do primeiro ídice do vetor
 
-			if (isset($newUrl[0])) { //Se tiver os dados que é o nome método no primeiro índice do vetor
-				$this->class = ucfirst($newUrl[0]).'Controller'; //
-				array_shift($newUrl);
+			if (isset($newUrl[0])) { //Se tiver um valor na primeira posição do vetor
+				$this->class = ucfirst($newUrl[0]).'Controller'; //Pega a primeira letra do valor da primeira posição do vetor e deixa ela em maiúcula atribui ela a um atributo
+				array_shift($newUrl); //Tirando os dados do primeiro ídice do vetor
 
-				if (isset($newUrl[0])) {
-					$this->method = $newUrl[0];
-					array_shift($newUrl);
+				if (isset($newUrl[0])) { //Se tiver um valor na primeira posição do vetor
+					$this->method = $newUrl[0]; //Pega a primeira letra do valor da primeira posição do vetor e deixa ela em maiúcula atribui ela a um atributo
+					array_shift($newUrl); //Tirando os dados do primeiro ídice do vetor
 
-					if (isset($newUrl[0])) {
-						$this->params = $newUrl;
+					if (isset($newUrl[0])) { //Se tiver um valor na primeira posição do vetor
+						$this->params = $newUrl; //Colocar todos os arrays que sobraram como parâmetros dentro de um atributo
 					}
 				}
 			}
 		}
 
-		public function run()
+		public function run() //Método run()
 		{
-			if (class_exists('\Rafa\Http\Controllers\\'.$this->class) && method_exists('\Rafa\Http\Controllers\\'.$this->class, $this->method)) {
+			if (class_exists('\Rafa\Http\Controllers\\'.$this->class) && method_exists('\Rafa\Http\Controllers\\'.$this->class, $this->method)) { //Verifica se a classe existe | Verifica se o método dentro da classe existe
 
 				try {
-					$controll = "\Rafa\Http\Controllers\\".$this->class;
-					$response = call_user_func_array(array(new $controll, $this->method), $this->params);
-					return json_encode(array('data' => $response, 'status' => 'sucess'));
+					$controll = "\Rafa\Http\Controllers\\".$this->class; //Especificando que a variável $controll vai receber a classe passada na requisição
+					$response = call_user_func_array(array(new $controll, $this->method), $this->params); //Especificando que a variável $response vai receber o retorno do método do objeto instanciado pela classe
+					return json_encode(array('data' => $response, 'status' => 'sucess')); //
 				} catch (\Exception $e) {
-					return json_encode(array('data' => $e->getMessage(), 'status' => 'error'));
+					return json_encode(array('data' => $e->getMessage(), 'status' => 'error')); //Retorna um erro
 				}
 				
 			} else {
 
-				return json_encode(array('data' => 'Operação Inválida', 'status' => 'error'));
+				return json_encode(array('data' => 'Operação Inválida', 'status' => 'error')); //Retorna um erro
 
 			}
 		}

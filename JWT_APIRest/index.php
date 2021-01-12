@@ -8,5 +8,5 @@
 
 	if (isset($_REQUEST) && !empty($_REQUEST)) { //Se existir uma Requisição e se a essa requisição retornar uma valor que não seja falso
 		$rest = new Rest($_REQUEST); //Criando um objeto e enviando como parâmetro a requisição para o método construtor
-		echo $rest->run(); //Executando o objeto
+		echo $rest->run(); //Executando o método
 	}
