@@ -4,7 +4,7 @@
     class AuthController{
         public static function login(){
 
-            if ($_POST['email'] == 'teste@gmail.com' && $_POST['123']) {
+            if ($_POST['email'] == 'teste@gmail.com' && $_POST['password'] == '123') {
                 //Application Key
                 $key = '123456'; //É a senha do token
 
@@ -16,8 +16,8 @@
 
                 //Payload - Content
                 $payload = [ //Campos que devem ser autenticados
-                    'name' => 'Nome do usuario', 
-                    'email' => 'email@email.com',
+                    'name' => 'Joallisson', 
+                    'email' => $_POST['email'],
                 ];
 
                 //JSON
@@ -41,6 +41,12 @@
             throw new \Exception('Não Autenticado'); //Caso der error exibe essa mensagem
             
         }
+
+        public static function checkAuth() //Esse método vai basicamente ver se o usuário que está tentando acessar a api tem um token e se ele é válido
+        {
+
+        }
+
     }
 
 

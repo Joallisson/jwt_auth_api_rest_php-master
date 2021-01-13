@@ -21,7 +21,18 @@
                 data: {'email' : user_email, 'password': user_password} //Dados que serão enviados
             })
             .done(function( data ) { //Quando o retorno dos dados estiverem prontos
-                console.log(data);
+                //console.log(data); //Era pra mostrar o console
+                localStorage.setItem('chave_do_token_jwt', data.data); // Armazenar o token dentro do navegador e para isso é necessário, criar a chave do token como primeiro parâmetro e depois o pegar os dados enviados ("data") e depois e depois pegar os dados dentro do atributo (".data()")
+            });
+        }
+
+        function getUsers(){ //Função para fazer pegar os usuários
+            $.ajax({ //Função ajax
+                url: "http://localhost/jwt_auth_api_rest_php-master/JWT_APIRest/api/users/getall", //Link para onde irão os parâmetros que no caso é UsersController
+                method: 'GET', //Método a ser usado para envio dos dados para o UsersController
+            })
+            .done(function(data) { //Quando o retorno dos dados estiverem prontos
+                console.log(data); //Pra mostrar as informações do usuário no console
             });
         }
 
