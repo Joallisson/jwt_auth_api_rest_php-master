@@ -30,6 +30,9 @@
             $.ajax({ //Função ajax
                 url: "http://localhost/jwt_auth_api_rest_php-master/JWT_APIRest/api/users/getall", //Link para onde irão os parâmetros que no caso é UsersController
                 method: 'GET', //Método a ser usado para envio dos dados para o UsersController
+                headers: {
+                    'Authorization' : 'Bearer ' + localStorage.getItem('chave_do_token_jwt') //Criar cabeçalho concatenando várias informações | 
+                }
             })
             .done(function(data) { //Quando o retorno dos dados estiverem prontos
                 console.log(data); //Pra mostrar as informações do usuário no console

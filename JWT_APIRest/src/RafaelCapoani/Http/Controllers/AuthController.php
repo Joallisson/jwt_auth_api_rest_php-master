@@ -44,7 +44,9 @@
 
         public static function checkAuth() //Esse método vai basicamente ver se o usuário que está tentando acessar a api tem um token e se ele é válido
         {
+            $http_header = apache_request_headers(); //Vai pegar todos os dados do cabeçalho chamado Authorization
 
+            $bearer = explode(' ', $http_header['Authorization']); //Vai tirar o nome "bearer" do cabeçalho e deixar somente as informações do token
         }
 
     }
