@@ -46,7 +46,28 @@
         {
             $http_header = apache_request_headers(); //Vai pegar todos os dados do cabeçalho chamado Authorization
 
-            $bearer = explode(' ', $http_header['Authorization']); //Vai tirar o nome "bearer" do cabeçalho e deixar somente as informações do token
+            if (isset($http_header['Authorization']) && $http_header['Authorization'] != null) {
+                $bearer = explode(' ', $http_header['Authorization']); //Vai tirar o nome "bearer" do cabeçalho e deixar somente as informações do token
+
+                //bearer[0] = 'bearer';
+                //bearer[1] = 'token jwt';
+
+                $token = explode('.', $bearer[1]); //Está pegando o token jwt e separando dividindo sempre que tiver um ponto
+                $header = $token[0]; //Contém as informações de cabeçalho
+                $payload = $token[1]; //Contém as informações que devem ser criptografadas
+                $sign = $token[2]; //Contém as informações da assinatura que nada mais é que a concatenação do header e payload que abre com a chave $key
+
+                //Conferindo a assinatura
+                $valid = hash_hmac('sha256', $header . "." . $payload, '123456', true); //Crinado uma assinatura no qual o 'sha256' é o tipo de criptografia, o $header e o $payload são concatenados, depois vem a chave de criptografia e em seguia a poarametro true
+                $valid = base64_encode($valid); //Criptografar a assinatura
+
+                if ($sign === $valid) { //Está verificando se as duas assinatutas são iguais
+                    return true; //Se for igual retorna true
+                }
+            }
+            
+            return false; //Senão for igual
+
         }
 
     }
